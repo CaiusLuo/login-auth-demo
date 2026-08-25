@@ -7,6 +7,8 @@ import java.net.http.HttpClient;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpHeaders;
@@ -18,6 +20,8 @@ import org.springframework.web.client.RestClient;
 @Component
 @Profile("prod")
 public class HttpUsernameModerationClient implements UsernameModerationClient {
+
+    private static final Logger log = LoggerFactory.getLogger(HttpUsernameModerationClient.class);
 
     private static final String SYSTEM_PROMPT = """
             You review proposed usernames against a basic community policy.
@@ -77,7 +81,7 @@ public class HttpUsernameModerationClient implements UsernameModerationClient {
                 throw new IllegalArgumentException("Missing model content");
             }
             JsonNode result = objectMapper.readTree(content);
-            if (!result.isObject() || result.size() != 3
+            if (!result.isObject()
                     || !result.has("decision") || !result.has("reasonCode") || !result.has("reasonSummary")) {
                 throw new IllegalArgumentException("Invalid model response schema");
             }
@@ -87,6 +91,8 @@ public class HttpUsernameModerationClient implements UsernameModerationClient {
                     requiredText(result, "reasonCode"),
                     requiredText(result, "reasonSummary"));
         } catch (Exception exception) {
+            log.warn("Username moderation call failed: type={}, message={}",
+                    exception.getClass().getSimpleName(), exception.getMessage());
             throw new ApiException(
                     org.springframework.http.HttpStatus.SERVICE_UNAVAILABLE,
                     "MODERATION_UNAVAILABLE",
