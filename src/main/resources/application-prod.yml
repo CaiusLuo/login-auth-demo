@@ -1,0 +1,12 @@
+server:
+  port: 18080
+  address: 127.0.0.1
+  forward-headers-strategy: framework
+  servlet:
+    session:
+      cookie:
+        secure: true
+
+spring:
+  jpa:
+    show-sql: false

@@ -1,0 +1,20 @@
+[Unit]
+Description=Login authorization demo
+After=network-online.target mysql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=login-auth-demo
+Group=login-auth-demo
+EnvironmentFile=/etc/login-auth-demo/login-auth-demo.env
+WorkingDirectory=/opt/login-auth-demo
+ExecStart=/usr/bin/java -jar /opt/login-auth-demo/login-auth-demo.jar
+SuccessExitStatus=143
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

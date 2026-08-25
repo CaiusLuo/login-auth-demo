@@ -1,0 +1,19 @@
+:root { font-family: Inter, system-ui, sans-serif; color: #172033; background: #f3f6fb; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+header { min-height: 64px; padding: 0 8vw; display: flex; align-items: center; justify-content: space-between; background: #172033; color: white; }
+nav { display: flex; align-items: center; gap: 18px; }
+nav a, .link { color: white; background: none; padding: 0; }
+main { max-width: 960px; margin: 48px auto; padding: 0 20px; }
+.card { background: white; border-radius: 12px; padding: 28px; box-shadow: 0 8px 32px #17203318; }
+.narrow { max-width: 440px; margin: auto; }
+form { display: grid; gap: 16px; }
+label { display: grid; gap: 6px; font-weight: 600; }
+input { width: 100%; padding: 10px 12px; border: 1px solid #b8c0cc; border-radius: 6px; font: inherit; }
+button { width: fit-content; padding: 9px 16px; border: 0; border-radius: 6px; background: #2563eb; color: white; cursor: pointer; }
+button:disabled { opacity: .6; cursor: wait; }
+.error { color: #b42318; }
+.search { display: flex; margin-bottom: 18px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; border-bottom: 1px solid #e4e8ef; padding: 12px 8px; }
+@media (max-width: 640px) { header { align-items: flex-start; gap: 12px; flex-direction: column; padding: 16px 20px; } nav { flex-wrap: wrap; } table { font-size: 14px; } }
