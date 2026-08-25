@@ -5,7 +5,7 @@ server:
   servlet:
     session:
       cookie:
-        secure: true
+        secure: ${SESSION_COOKIE_SECURE:true}
 
 spring:
   jpa:
