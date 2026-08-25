@@ -42,4 +42,4 @@ app:
     base-url: ${LLM_BASE_URL:https://api.openai.com/v1}
     api-key: ${LLM_API_KEY:}
     model: ${LLM_MODEL:gpt-4.1-mini}
-    timeout: 8s
+    timeout: ${LLM_TIMEOUT:30s}
